@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.da.medinear.ui.main.clinic.ClinicViewModel" />
+        <variable
+            name="listener"
+            type="com.da.medinear.ui.main.clinic.ClinicListener" />
+    </data>
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#4DCCCCCC">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                app:clinicAvatar="@{viewModel.avatar}"
+                android:layout_width="match_parent"
+                tools:src="@drawable/clinic"
+                android:scaleType="centerCrop"
+                android:onClick="@{v -> listener.openGalleryClicked()}"
+                android:layout_height="200dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:hint="Clinic Name"
+                    android:text="@={viewModel.name}"
+                    android:background="@drawable/bg_input" />
+
+                <TextView
+                    android:drawableLeft="@drawable/ic_map"
+                    android:background="@drawable/bg_input"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:drawablePadding="10dp"
+                    android:hint="Address"
+                    android:text="@{viewModel.address.name}"
+                    android:gravity="center_vertical"
+                    android:onClick="@{v -> listener.openMapClicked()}"
+                    android:singleLine="true"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:drawablePadding="10dp"
+                    android:drawableLeft="@drawable/ic_phone"
+                    android:hint="Phone"
+                    android:text="@={viewModel.phone}"
+                    android:background="@drawable/bg_input" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:layout_weight="1"
+                        android:drawableLeft="@drawable/ic_clock"
+                        android:background="@drawable/bg_input"
+                        android:layout_width="0dp"
+                        android:drawablePadding="10dp"
+                        android:hint="Open"
+                        android:onClick="@{v -> listener.openClicked()}"
+                        android:gravity="center_vertical"
+                        app:time="@{viewModel.open}"
+                        android:singleLine="true"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text=" - "
+                        android:layout_width="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:drawableLeft="@drawable/ic_clock"
+                        android:background="@drawable/bg_input"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:onClick="@{v -> listener.closeClicked()}"
+                        android:drawablePadding="10dp"
+                        android:hint="Close"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        app:time="@{viewModel.close}"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/bg_input"
+                    android:backgroundTint="@color/blue"
+                    android:text="Ok"
+                    android:onClick="@{v -> listener.onSubmitClicked()}"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</layout>

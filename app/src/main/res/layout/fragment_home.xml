@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="listener"
+            type="com.da.medinear.ui.main.home.HomeListener" />
+        <variable
+            name="adapter"
+            type="com.da.medinear.ui.main.home.ClinicAdapter" />
+        <variable
+            name="isAdmin"
+            type="java.lang.Boolean" />
+    </data>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search"
+            android:background="@drawable/bg_input"
+            android:layout_width="match_parent"
+            android:layout_margin="16dp"
+            android:layout_height="wrap_content"/>
+        <androidx.recyclerview.widget.RecyclerView
+            app:adapter="@{adapter}"
+            android:layout_below="@id/search"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_add"
+            android:layout_width="wrap_content"
+            android:layout_margin="16dp"
+            android:visibility="@{isAdmin ? View.VISIBLE : View.GONE}"
+            app:tint="@color/white"
+            android:backgroundTint="@color/primary"
+            android:onClick="@{v -> listener.onAddClicked()}"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+</layout>

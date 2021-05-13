@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="isAdmin"
+            type="java.lang.Boolean" />
+        <variable
+            name="viewModel"
+            type="com.da.medinear.ui.main.clinic_detail.ClinicDetailViewModel" />
+
+        <variable
+            name="listener"
+            type="com.da.medinear.ui.main.clinic_detail.ClinicDetailListener" />
+
+        <variable
+            name="adapter"
+            type="com.da.medinear.ui.main.clinic_detail.RatingAdapter" />
+
+        <variable
+            name="star"
+            type="java.lang.Float" />
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_above="@id/bottom"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/im_avatar"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:scaleType="centerCrop"
+                    app:clinicAvatar="@{viewModel.clinic.avatar}" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/im_avatar"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewModel.clinic.name}"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        tools:text="Name" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:drawableLeft="@drawable/ic_map"
+                        android:drawablePadding="10dp"
+                        android:text="@{viewModel.clinic.location.name}"
+                        tools:text="Location" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:autoLink="phone"
+                        android:drawableLeft="@drawable/ic_phone"
+                        android:drawablePadding="10dp"
+                        android:text="@{viewModel.clinic.phone}"
+                        tools:text="Location" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:drawableLeft="@drawable/ic_clock"
+                        android:drawablePadding="10dp"
+                        app:close="@{viewModel.clinic.close}"
+                        app:open="@{viewModel.clinic.open}"
+                        tools:text="Time" />
+
+                    <RatingBar
+                        android:id="@+id/rb"
+                        style="@style/Widget.AppCompat.RatingBar.Indicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:isIndicator="true"
+                        android:numStars="5"
+                        android:rating="@{star}"
+                        android:stepSize="0.1" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:adapter="@{adapter}"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                </LinearLayout>
+            </RelativeLayout>
+        </androidx.core.widget.NestedScrollView>
+        <LinearLayout
+            android:id="@+id/bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:visibility="@{isAdmin ? View.VISIBLE : View.GONE}"
+            android:padding="16dp"
+            android:orientation="vertical">
+            <androidx.appcompat.widget.AppCompatButton
+                android:text="Update"
+                android:textColor="@color/white"
+                android:onClick="@{v -> listener.onEditClicked()}"
+                android:background="@drawable/bg_input"
+                android:backgroundTint="@color/primary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:text="Delete"
+                android:textColor="@color/white"
+                android:background="@drawable/bg_input"
+                android:onClick="@{v -> listener.onDeleteClicked()}"
+                android:backgroundTint="@android:color/holo_red_light"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

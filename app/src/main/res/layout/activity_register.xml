@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.da.medinear.ui.register.RegisterViewModel" />
+        <variable
+            name="listener"
+            type="com.da.medinear.ui.register.RegisterListener" />
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:background="@drawable/bg_register"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="20dp"
+            android:orientation="vertical">
+            <androidx.appcompat.widget.AppCompatImageView
+                android:src="@drawable/ic_back"
+                app:tint="@color/white"
+                android:onClick="@{v -> listener.onBackClicked()}"
+                android:padding="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_marginTop="24dp"
+                android:textSize="36sp"
+                android:text="Sign up"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:background="@drawable/bg_input"
+                android:drawableLeft="@drawable/ic_user_name"
+                android:hint="Name"
+                android:text="@={viewModel.name}"
+                android:drawablePadding="10dp"
+                android:layout_marginTop="24dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:background="@drawable/bg_input"
+                android:drawableLeft="@drawable/ic_user_name"
+                android:hint="User name"
+                android:text="@={viewModel.userName}"
+                android:drawablePadding="10dp"
+                android:layout_marginTop="24dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:background="@drawable/bg_input"
+                android:drawableLeft="@drawable/ic_password"
+                android:hint="Password"
+                android:text="@={viewModel.password}"
+                android:inputType="textPassword"
+                android:drawablePadding="10dp"
+                android:layout_marginTop="24dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:background="@drawable/bg_input"
+                android:drawableLeft="@drawable/ic_password"
+                android:hint="re-password"
+                android:text="@={viewModel.rePassword}"
+                android:drawablePadding="10dp"
+                android:inputType="textPassword"
+                android:layout_marginTop="24dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_marginTop="24dp"
+                android:text="Register"
+                android:onClick="@{v -> listener.onRegisterClicked()}"
+                android:textColor="@color/white"
+                android:backgroundTint="#58CA75"
+                android:background="@drawable/bg_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

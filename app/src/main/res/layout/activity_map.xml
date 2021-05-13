@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="listener"
+            type="com.da.medinear.ui.main.clinic.map.MapListener" />
+    </data>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/map"
+            tools:context=".MapsActivity"
+            android:name="com.google.android.gms.maps.SupportMapFragment" />
+        <androidx.appcompat.widget.SearchView
+            android:layout_margin="16dp"
+            android:id="@+id/search"
+            app:queryHint="Search location"
+            android:background="@drawable/bg_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:text="ok"
+            android:onClick="@{v -> listener.onSubmitLocationClicked()}"
+            android:textColor="@color/white"
+            android:layout_alignParentBottom="true"
+            android:backgroundTint="@color/primary"
+            android:background="@drawable/bg_input"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="128dp"
+            android:layout_marginRight="128dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+</layout>
