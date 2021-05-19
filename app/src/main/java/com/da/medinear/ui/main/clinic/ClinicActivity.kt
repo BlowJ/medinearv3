@@ -92,7 +92,7 @@ class ClinicActivity : AppCompatActivity(), ClinicListener {
         val calendar = Calendar.getInstance()
         val picker = TimePickerDialog(this,
             { p0, p1, p2 ->
-                calendar.set(Calendar.HOUR, p1)
+                calendar.set(Calendar.HOUR_OF_DAY, p1)
                 calendar.set(Calendar.MINUTE, p2)
                 target.postValue(calendar.timeInMillis)
             }, calendar.get(Calendar.HOUR), calendar.get(Calendar.MINUTE), false)

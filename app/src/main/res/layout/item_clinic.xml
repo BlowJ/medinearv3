@@ -70,6 +70,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         tools:text="Address"/>
+                    <RatingBar
+                        android:id="@+id/rb"
+                        style="@style/Widget.AppCompat.RatingBar.Indicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:isIndicator="true"
+                        android:numStars="5"
+                        android:rating="@{item.starAvg}"
+                        android:stepSize="0.1" />
                 </LinearLayout>
             </RelativeLayout>
         </androidx.cardview.widget.CardView>

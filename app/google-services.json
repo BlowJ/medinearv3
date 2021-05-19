@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "169714821987",
-    "project_id": "medinear-f0d08",
-    "storage_bucket": "medinear-f0d08.appspot.com"
+    "project_number": "760696287697",
+    "project_id": "medinear-test",
+    "storage_bucket": "medinear-test.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:169714821987:android:9f3df534fd2ae0a5e50156",
+        "mobilesdk_app_id": "1:760696287697:android:6c8b6a37bcebd2031bf0f0",
         "android_client_info": {
           "package_name": "com.da.medinear"
         }
       },
       "oauth_client": [
         {
-          "client_id": "169714821987-d28k3vhotal6le9rsj42g1n1irdav27a.apps.googleusercontent.com",
+          "client_id": "760696287697-gskp7jvnfcmunhplcep4ncj9tu9m9g4b.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDZSWSr9HlkHi2-jBG_N6fu11JsKqlWItc"
+          "current_key": "AIzaSyAZ-U0QMx4FaPCjvLQ18UQd33NiSzSCLsk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "169714821987-d28k3vhotal6le9rsj42g1n1irdav27a.apps.googleusercontent.com",
+              "client_id": "760696287697-gskp7jvnfcmunhplcep4ncj9tu9m9g4b.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

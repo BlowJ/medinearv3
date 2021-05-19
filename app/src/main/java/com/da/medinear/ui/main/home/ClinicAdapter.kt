@@ -32,12 +32,16 @@ class ClinicAdapter(private val inflater: LayoutInflater, private val listener: 
 
     class ClinicFilter(private val all: List<Clinic>, private val adapter: ClinicAdapter) : Filter() {
         override fun performFiltering(key: CharSequence?): FilterResults {
+            val values = key.toString().split("-")
+            val search = values.getOrNull(0) ?: ""
+            val from = (values.getOrNull(1) ?: "0").toFloat()
+            val to = (values.getOrNull(2) ?: "5").toFloat()
             val arr = all.filter {
-                it.name?.contains(key.toString(), true) ?: false
+                (it.name?.contains(search, true) ?: false) && it.getStarAvg() >= from && it.getStarAvg() <= to
             }
             return FilterResults().apply {
                 count = arr.size
-                values = arr
+                this.values = arr
             }
         }
 

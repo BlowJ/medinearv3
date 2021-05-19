@@ -15,15 +15,30 @@
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/search"
-            android:background="@drawable/bg_input"
+        <LinearLayout
+            android:id="@+id/filter"
             android:layout_width="match_parent"
-            android:layout_margin="16dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/search"
+                android:background="@drawable/bg_input"
+                android:layout_width="match_parent"
+                android:layout_margin="16dp"
+                android:layout_height="wrap_content"/>
+            <com.google.android.material.slider.RangeSlider
+                android:id="@+id/range_star"
+                app:labelBehavior="withinBounds"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:valueFrom="0"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:valueTo="5" />
+        </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
             app:adapter="@{adapter}"
-            android:layout_below="@id/search"
+            android:layout_below="@id/filter"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

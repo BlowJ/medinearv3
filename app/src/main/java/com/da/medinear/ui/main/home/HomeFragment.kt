@@ -16,9 +16,10 @@ import com.da.medinear.ui.main.MainActivity
 import com.da.medinear.ui.main.clinic.ClinicActivity
 import com.da.medinear.ui.main.clinic_detail.ClinicDetailActivity
 import com.da.medinear.utils.ShareUtils
+import com.google.android.material.slider.RangeSlider
 
-class HomeFragment : Fragment(), HomeListener, SearchView.OnQueryTextListener {
-
+class HomeFragment : Fragment(), HomeListener, SearchView.OnQueryTextListener,
+    RangeSlider.OnChangeListener {
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var binding: FragmentHomeBinding
     private lateinit var adapter: ClinicAdapter
@@ -43,7 +44,10 @@ class HomeFragment : Fragment(), HomeListener, SearchView.OnQueryTextListener {
         binding.search.setOnQueryTextListener(this)
         ShareUtils(requireContext()).getValue(ShareUtils.KEY_USER, User::class.java)?.apply {
             binding.isAdmin = role == 1
+
         }
+        binding.rangeStar.setValues(0f, 5f)
+        binding.rangeStar.addOnChangeListener(this)
     }
 
     override fun onAddClicked() {
@@ -62,11 +66,20 @@ class HomeFragment : Fragment(), HomeListener, SearchView.OnQueryTextListener {
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
-        adapter.filter.filter(newText)
+        filter()
         return true
     }
 
     override fun onAddressItemClicked(item: Clinic) {
         (activity as MainActivity).showMap(item)
+    }
+
+    override fun onValueChange(slider: RangeSlider, value: Float, fromUser: Boolean) {
+        filter()
+    }
+
+    private fun filter() {
+        val key = "${binding.search.query}-${binding.rangeStar.values[0]}-${binding.rangeStar.values[1]}"
+        adapter.filter.filter(key)
     }
 }
