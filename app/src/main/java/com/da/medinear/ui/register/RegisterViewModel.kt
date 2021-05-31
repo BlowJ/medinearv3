@@ -29,15 +29,18 @@ class RegisterViewModel : ViewModel(), ValueEventListener {
             error.postValue("Password not same")
             return
         }
+        // kiểm tra user name đã tồn tại hay chưa
         reference.orderByChild("userName").equalTo(userName).addValueEventListener(this)
     }
 
     override fun onDataChange(snapshot: DataSnapshot) {
+        // nếu user name đã tồn tại thông báo lỗi
         if (snapshot.exists()) {
             error.postValue("User name exists")
             return
         }
         reference.removeEventListener(this)
+        // Đăng ký thông tin user lên firebase
         val user = User().apply {
             name = this@RegisterViewModel.name
             userName = this@RegisterViewModel.userName

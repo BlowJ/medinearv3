@@ -39,6 +39,7 @@ class RatingDialog : BottomSheetDialogFragment(), View.OnClickListener {
             Toast.makeText(context,  "Comment is empty", Toast.LENGTH_LONG).show()
             return
         }
+        // Gửi rating lên firebase
         val user = ShareUtils(requireContext()).getValue(ShareUtils.KEY_USER, User::class.java)
         val rating = Rating()
         rating.comment = binding.edtComment.text.toString()

@@ -65,6 +65,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:drawableLeft="@drawable/ic_map"
+                        android:onClick="@{v -> listener.onAddressItemClicked()}"
                         android:drawablePadding="10dp"
                         android:text="@{viewModel.clinic.location.name}"
                         tools:text="Location" />
@@ -73,7 +74,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:autoLink="phone"
+                        android:autoLink="all"
                         android:drawableLeft="@drawable/ic_phone"
                         android:drawablePadding="10dp"
                         android:text="@{viewModel.clinic.phone}"
@@ -88,6 +89,17 @@
                         app:close="@{viewModel.clinic.close}"
                         app:open="@{viewModel.clinic.open}"
                         tools:text="Time" />
+
+                    <TextView
+                        android:text="@{viewModel.clinic.website}"
+                        android:textSize="14sp"
+                        android:onClick="@{v -> listener.onMoreInformationClicked(viewModel.clinic.website)}"
+                        android:layout_marginTop="10dp"
+                        android:drawablePadding="10dp"
+                        android:drawableLeft="@drawable/ic_browser"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="Website"/>
 
                     <RatingBar
                         android:id="@+id/rb"

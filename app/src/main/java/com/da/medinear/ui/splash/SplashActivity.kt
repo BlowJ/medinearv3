@@ -18,9 +18,11 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
         Handler().postDelayed({
+            // Nếu đã đăng nhập rồi thì mở màn home
             val intent = if (ShareUtils(this).getValue(ShareUtils.KEY_USER, User::class.java) != null) {
                 Intent(this, MainActivity::class.java)
             } else {
+                // Nếu chưa thì mở màn hình login
                 Intent(this, LoginActivity::class.java)
             }
             startActivity(intent)

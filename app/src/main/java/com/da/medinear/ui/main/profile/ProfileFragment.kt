@@ -29,11 +29,13 @@ class ProfileFragment : Fragment(), ProfileListener {
                 context?.apply {
                     DialogUtils.showProgressDialog(this)
                 }
+                // Upload hình ảnh lên firebase
                 AppBinding.uploadImage(this,"images") { success, error ->
                     error?.apply {
                         viewModel.error.postValue(this)
                     }
                     success?.apply {
+                        // thành công thì cập nhập lại avatar
                         viewModel.avatar = this
                         binding.viewModel = viewModel
                     }
@@ -54,19 +56,23 @@ class ProfileFragment : Fragment(), ProfileListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // Lấy thông tin user đã đăng nhập để set hiển thị lên màn hình
         val user = ShareUtils(view.context).getValue(ShareUtils.KEY_USER, User::class.java)
         viewModel.name = user?.name
         viewModel.userName = user?.userName
         viewModel.password = user?.password
         viewModel.avatar = user?.avatar
+        viewModel.role = user?.role ?: 0
         binding.listener = this
         binding.viewModel = viewModel
 
+        // show thông báo khi update thất bại
         viewModel.error.observe(viewLifecycleOwner) {
             DialogUtils.dismissProgressDialog()
             Toast.makeText(context, it, Toast.LENGTH_LONG).show()
         }
 
+        // Show thông báo update profile thành công
         viewModel.success.observe(viewLifecycleOwner) {
             DialogUtils.dismissProgressDialog()
             Toast.makeText(context, "Update success", Toast.LENGTH_LONG).show()
@@ -78,6 +84,7 @@ class ProfileFragment : Fragment(), ProfileListener {
 
     override fun onLogoutClicked() {
         context?.apply {
+            // Xóa dữ liệu user và thực hiện logout
             ShareUtils(this).logout()
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
@@ -86,6 +93,9 @@ class ProfileFragment : Fragment(), ProfileListener {
 
     }
 
+    /**
+     * Mở màn hình chọn ảnh từ device
+     * */
     override fun onUpdateAvatarClicked() {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "image/*"

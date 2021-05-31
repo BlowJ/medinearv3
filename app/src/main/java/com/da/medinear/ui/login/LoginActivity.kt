@@ -28,11 +28,13 @@ class LoginActivity : AppCompatActivity(), LoginListener {
         binding.viewModel = viewModel
         binding.listener = this
 
+        // Nhận lỗi khi login thất bại
         viewModel.error.observe(this) {
             DialogUtils.dismissProgressDialog()
             Toast.makeText(this, it, Toast.LENGTH_LONG).show()
         }
 
+        // Đăng nhập thành công
         viewModel.success.observe(this) {
             DialogUtils.dismissProgressDialog()
             shared.setValue(viewModel.user, ShareUtils.KEY_USER)
@@ -41,6 +43,7 @@ class LoginActivity : AppCompatActivity(), LoginListener {
     }
 
     private fun checkLogin() {
+        // Kiểm tra đã đăng nhập hay chưa nếu đã đăng nhập rồi thì sẽ mở màn home luôn
         if (shared.getValue(ShareUtils.KEY_USER, User::class.java) != null) {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
@@ -53,6 +56,9 @@ class LoginActivity : AppCompatActivity(), LoginListener {
         viewModel.login()
     }
 
+    /**
+     * Mở màn hình đăng ký
+     * */
     override fun onRegisterClicked() {
         val intent = Intent(this, RegisterActivity::class.java)
         startActivity(intent)

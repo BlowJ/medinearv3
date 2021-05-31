@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
@@ -9,7 +10,7 @@
             name="listener"
             type="com.da.medinear.ui.main.home.HomeListener" />
     </data>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
@@ -50,7 +51,6 @@
                         android:text="@{item.location.name}"
                         android:textColor="@color/white"
                         android:textSize="14sp"
-                        android:onClick="@{v -> listener.onAddressItemClicked(item)}"
                         android:layout_marginTop="10dp"
                         android:drawablePadding="10dp"
                         android:drawableTint="@color/white"
@@ -58,18 +58,20 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         tools:text="Address"/>
+
                     <TextView
-                        app:open="@{item.open}"
-                        app:close="@{item.close}"
-                        android:textColor="@color/white"
-                        android:textSize="14sp"
-                        android:layout_marginTop="5dp"
-                        android:drawablePadding="10dp"
-                        android:drawableTint="@color/white"
-                        android:drawableLeft="@drawable/ic_clock"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        tools:text="Address"/>
+                        android:layout_marginTop="5dp"
+                        android:drawableLeft="@drawable/ic_clock"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/white"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        app:close="@{item.close}"
+                        app:open="@{item.open}"
+                        tools:text="Address" />
+
                     <RatingBar
                         android:id="@+id/rb"
                         style="@style/Widget.AppCompat.RatingBar.Indicator"

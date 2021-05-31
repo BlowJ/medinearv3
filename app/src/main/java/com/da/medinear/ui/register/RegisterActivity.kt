@@ -20,11 +20,13 @@ class RegisterActivity : AppCompatActivity(), RegisterListener {
         binding.viewModel = viewModel
         binding.listener = this
 
+        // show thông báo đăng ký thất bại
         viewModel.error.observe(this) {
             DialogUtils.dismissProgressDialog()
             Toast.makeText(this, it, Toast.LENGTH_LONG).show()
         }
 
+        // show thông báo thành công
         viewModel.success.observe(this) {
             DialogUtils.dismissProgressDialog()
             Toast.makeText(this, "Register success", Toast.LENGTH_LONG).show()
@@ -32,6 +34,9 @@ class RegisterActivity : AppCompatActivity(), RegisterListener {
         }
     }
 
+    /**
+     * Thực hiện đăng ký tài khoản
+     * */
     override fun onRegisterClicked() {
         DialogUtils.showProgressDialog(this)
         viewModel.register()

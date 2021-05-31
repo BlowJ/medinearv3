@@ -24,11 +24,13 @@ class LoginViewModel : ViewModel(), ValueEventListener {
             error.postValue("Data is blank")
             return
         }
+        // thực hiện truy vấn login với tài khoản vừa nhập
         reference.child(userName ?: "").addValueEventListener(this)
     }
 
     override fun onDataChange(snapshot: DataSnapshot) {
         if (snapshot.exists()) {
+            // nếu tài khoản vcaf mật khẩu hợp lệ thì thông báo thành công
             user = snapshot.getValue(User::class.java)
             if (user?.password == password) {
                 success.postValue(true)

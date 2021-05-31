@@ -24,6 +24,9 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         selectFragment(HomeFragment())
     }
 
+    /**
+     *  Show màn hình tương ứng khi click vào bottom dưới màn hình
+     * */
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         val fm = when(item.itemId) {
             R.id.nav_map -> MapFragment()
@@ -40,6 +43,9 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         t.commit()
     }
 
+    /**
+     * Show màn hình map và tự động focus vào vị trí bệnh viện vừa chọn
+     * */
     fun showMap(item: Clinic) {
         val fm = MapFragment()
         fm.arguments = Bundle().apply {

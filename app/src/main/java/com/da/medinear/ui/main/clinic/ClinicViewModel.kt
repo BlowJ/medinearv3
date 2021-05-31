@@ -16,6 +16,8 @@ class ClinicViewModel : ViewModel() {
     var open = MutableLiveData<Long>()
     var close = MutableLiveData<Long>()
     var avatar = MutableLiveData<String>()
+//    var url = ""
+    var website: String? = null
 
     val error = MutableLiveData<String>()
     val success = MutableLiveData<Boolean>()
@@ -26,18 +28,24 @@ class ClinicViewModel : ViewModel() {
             error.postValue("Data empty")
             return
         }
+        // upload hình ảnh lên firebase
         uploadImage {
+            // Nếu upload thành công thì cập nhập clinic
             clinic.avatar = it
             clinic.close = close.value
             clinic.open = open.value
             clinic.location = address.value
             clinic.name = name
             clinic.phone = phone
+            clinic.website = website
             FirebaseDatabase.getInstance().getReference(Constance.FIREBASE_CLINIC).child(clinic.id.toString()).setValue(clinic)
             this@ClinicViewModel.success.postValue(true)
         }
     }
 
+    /**
+     * Xử lý upload hình ảnh
+     * */
     private fun uploadImage(callback: (avatar: String) -> Unit) {
         if (avatar.value == clinic.avatar) {
             callback(clinic.avatar ?: "")

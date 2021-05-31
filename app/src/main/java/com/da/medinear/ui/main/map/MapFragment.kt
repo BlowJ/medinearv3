@@ -45,6 +45,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         if (checkPermission()) {
             loadMap()
         } else {
+            // xin quyền đề hiển thị map
             requestPermissions(
                 arrayOf(
                     Manifest.permission.ACCESS_FINE_LOCATION,
@@ -59,6 +60,9 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         mapFragment?.getMapAsync(this)
     }
 
+    /**
+     * Kiểm tra quyền đã được cấp hay chưa
+     * */
     private fun checkPermission(): Boolean {
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),
@@ -76,6 +80,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         initMap()
+        // vẽ các điểm bệnh viên lên trên map
         (context?.applicationContext as App).data.observe(viewLifecycleOwner) { it ->
             it.forEach {
                 mMap.addMarker(
@@ -95,12 +100,14 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
     }
 
     private fun initMap() {
+        // setting hiển thị map
         if (checkPermission()) {
             mMap.isMyLocationEnabled = true
         }
         mMap.uiSettings.isMyLocationButtonEnabled = true
         mMap.uiSettings.isZoomControlsEnabled = true
         mMap.setOnMarkerClickListener(this)
+        // thực hiện nắng nghe khi vị trí của người dùng thay đổi
         val manager = context?.getSystemService(Context.LOCATION_SERVICE) as? LocationManager
         manager?.apply {
             requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f, this@MapFragment)
@@ -119,11 +126,15 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         }
     }
 
+    /**
+     * Xử lý khi click vào marker thì sẽ show thông tin chi tiết của bệnh viện
+     * */
     override fun onMarkerClick(marker: Marker): Boolean {
         (marker.tag as? Clinic)?.apply {
             val l = Location("")
             l.latitude = this.location?.latitude ?: 0.0
             l.longitude = this.location?.longitude ?: 0.0
+            // tính toán khoảng cách từ vị trí cvuar người dùng đến bệnh viện
             val distance = (myLocation?.distanceTo(l) ?: 0f) / 1000f
             val df = DecimalFormat("#.##")
             MapClinicInfoDialog().show(this, df.format(distance).toFloat(), childFragmentManager)

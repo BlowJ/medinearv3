@@ -43,6 +43,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, SearchView.OnQueryT
         if (checkPermission()) {
             loadMap()
         } else {
+            // Xin quyền truy cập vào map
             requestPermissions(
                 arrayOf(
                     Manifest.permission.ACCESS_FINE_LOCATION,
@@ -52,12 +53,18 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, SearchView.OnQueryT
         }
     }
 
+    /**
+     * Load hiển thị map
+     * */
     private fun loadMap() {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
     }
 
+    /**
+     * Nếu chưa cấp quyền thì xin quyền truy cập vào map
+     * */
     private fun checkPermission(): Boolean {
         if (ActivityCompat.checkSelfPermission(
                 this,
@@ -78,6 +85,9 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, SearchView.OnQueryT
         initMap()
     }
 
+    /**
+     * Setup hiển thị cài đặt map
+     * */
     private fun initMap() {
         if (checkPermission()) {
             mMap.isMyLocationEnabled = true
@@ -97,6 +107,9 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, SearchView.OnQueryT
         }
     }
 
+    /**
+     * Tìm kiếm vị trí khi thưc hiện search
+     * */
     override fun onQueryTextSubmit(query: String?): Boolean {
         try {
             val result = geocoder.getFromLocationName(query, 1)
@@ -116,6 +129,9 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, SearchView.OnQueryT
         return true
     }
 
+    /**
+     * Lấy vị trí khi click vào map
+     * */
     override fun onMapClick(ln: LatLng) {
         val result = geocoder.getFromLocation(ln.latitude, ln.longitude, 1)
         if (result.isEmpty()) return
@@ -133,6 +149,9 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, SearchView.OnQueryT
         )
     }
 
+    /**
+     * Trả về vị trí vừa lựa chọn để thực hiện thêm bệnh viện
+     * */
     override fun onSubmitLocationClicked() {
         if (clinicLocal == null) {
             Toast.makeText(this, "Location not selected yet", Toast.LENGTH_LONG).show()

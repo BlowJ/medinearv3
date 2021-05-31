@@ -12,6 +12,7 @@ class Clinic : Serializable {
     var location: ClinicLocation? = null
     var phone: String? = null
     var rating: Map<String, Rating>? = null
+    var website: String? = null
 
     fun getStarAvg() : Float {
         var star = 0f
